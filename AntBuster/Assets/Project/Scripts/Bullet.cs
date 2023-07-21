@@ -13,13 +13,13 @@ public class Bullet : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         rigid.velocity = transform.forward * speed;
         enemyInfo = GameObject.FindAnyObjectByType<EnemyMove>();
-        Destroy(gameObject, 2.0f);
+        Destroy(gameObject, 1.0f);
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Enemy"))
         {
-            Debug.Log("콜라이더 : 내 총알이 무언가와 부딪혔다.");
+            
             Destroy(gameObject);
             other.GetComponent<EnemyMove>().Damaged(1);
         }

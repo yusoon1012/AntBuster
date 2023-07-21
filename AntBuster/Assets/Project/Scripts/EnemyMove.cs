@@ -1,30 +1,73 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UI;
 
 public class EnemyMove : MonoBehaviour
 {
     public int enemyLevel = 1;
+    public Slider hpBar;
+    public GameObject pickPizza;
     public GameObject pizzaObj;
     public GameObject goalObj;
     private NavMeshAgent agent;
     private Vector3 destination;
     private bool isMove;
     private bool isPizzaPos = false;
+    EnemySpawner spawner;
     Transform enemyTrans;
-    private float enemyHp;
+    public float enemyHp;
+    public float maxHp;
     Pizza pizzaClass;
     Goal goalClass;
-    
+    AntLevelManager antLevel;
 
     // Start is called before the first frame update
     void Start()
     {
         pizzaClass = GameObject.FindAnyObjectByType<Pizza>();
         goalClass = GameObject.FindAnyObjectByType<Goal>();
+        spawner = GameObject.FindAnyObjectByType<EnemySpawner>();
+        antLevel = GameObject.FindAnyObjectByType<AntLevelManager>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
-        enemyHp = 4;
+        switch(antLevel.antLevel)
+        {
+            case 1:
+                maxHp = 4;
+                break;
+            case 2:
+                maxHp = 5;
+                break;
+            case 3:
+                maxHp = 6;
+                break;
+            case 4:
+                maxHp = 7;
+                break;
+            case 5:
+                maxHp = 8;
+                break;
+            case 6:
+                maxHp = 9;
+                break;
+            case 7:
+                maxHp = 10;
+                break;
+            case 8:
+                maxHp = 11;
+                break;
+            case 9:
+                maxHp = 12;
+                break;
+            case 10:
+                maxHp = 15;
+                break;
+            default:
+                break;
+        }
+                enemyHp = maxHp;
+
     }
     private void SetDestination(Vector3 dest)
     {
@@ -35,6 +78,7 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        hpBar.value = enemyHp/maxHp;
         if(isPizzaPos == false)
         {
             SetDestination(pizzaClass.transform.position);
@@ -54,6 +98,18 @@ public class EnemyMove : MonoBehaviour
         }
         if(enemyHp<=0)
         {
+            if(isPizzaPos==true)
+            {
+                pizzaClass.AddPizza();
+            }
+            if(spawner.enemyCount>0)
+            {
+                spawner.DeleteCount(1);
+                antLevel.AddExp(1);
+            }
+
+
+
             Destroy(gameObject);
         }
     }
@@ -63,6 +119,12 @@ public class EnemyMove : MonoBehaviour
         if(other.tag.Equals("Pizza"))
         {
             isPizzaPos = true;
+            pizzaClass.RemovePizza();
+            if(pizzaClass.pizzaHp>=0)
+            {
+                pickPizza.SetActive(true);
+            }
+            
             Debug.Log("ÇÇÀÚ");
         }
         if(isPizzaPos==true&&other.tag.Equals("Goal"))
