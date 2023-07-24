@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TurretButton : MonoBehaviour
 {
     public GameObject turretPrefab;
+   
     Ray ray;
     RaycastHit hit;
     Camera cam;
@@ -35,4 +36,6 @@ public class TurretButton : MonoBehaviour
             spawnObj = Instantiate(turretPrefab, newPosition, turretPrefab.transform.rotation);
         }
     }
+
+    
 }

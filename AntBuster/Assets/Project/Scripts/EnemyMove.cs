@@ -14,6 +14,11 @@ public class EnemyMove : MonoBehaviour
     private Vector3 destination;
     private bool isMove;
     private bool isPizzaPos = false;
+    private bool isSlow;
+    private float speed;
+    
+    private float slowTimer=0f;
+    private float slowRate = 1.0f;
     EnemySpawner spawner;
     Transform enemyTrans;
     public float enemyHp;
@@ -25,6 +30,8 @@ public class EnemyMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        speed = 5f;
+        isSlow = false;
         pizzaClass = GameObject.FindAnyObjectByType<Pizza>();
         goalClass = GameObject.FindAnyObjectByType<Goal>();
         spawner = GameObject.FindAnyObjectByType<EnemySpawner>();
@@ -112,6 +119,24 @@ public class EnemyMove : MonoBehaviour
 
             Destroy(gameObject);
         }
+        if(isSlow==true)
+        {
+            slowTimer += Time.deltaTime;
+            if(slowTimer>=slowRate)
+            {
+                isSlow = false;
+            }
+            else
+            {
+            speed = 3f;
+            agent.speed = speed;
+
+            }
+        }
+        else
+        {
+            speed = 5f;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -137,5 +162,8 @@ public class EnemyMove : MonoBehaviour
     {
         enemyHp -= damage;
     }
-
+    public void Slow()
+    {
+        isSlow = true;
+    }
 }

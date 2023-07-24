@@ -12,13 +12,15 @@ public class BulletSpawner : MonoBehaviour
         Installation,
         Upgrade,
     }
+
     public GameObject shootingRange;
-    public GameObject muzzleFire=default;
+    public GameObject muzzleFire = default;
     public GameObject bulletPrefab = default;
     public float spawnRateMin = 0.5f;
     public float spawnRateMax = 3f;
     public Animator turretAni;
     public bool isFirstSet;
+    public int type;
 
     private Transform target = default;
     private float spawnRate = default;
@@ -27,7 +29,7 @@ public class BulletSpawner : MonoBehaviour
     private bool isPlayerIn = default;
     NavMeshObstacle obstacle;
     private bool isShooting = default;
-    private float bulletHeight = 1.0f;
+    public float bulletHeight;
 
     private bool targetOn = false;
     private Transform targetTrans;
@@ -35,7 +37,8 @@ public class BulletSpawner : MonoBehaviour
     private Vector3 targetPosition;
     private bool isClick = false;
 
-    public TurretState turretState = TurretState.Installation;
+
+    public TurretState turretState;
 
     private AudioSource shootSound;
     // Start is called before the first frame update
@@ -49,6 +52,8 @@ public class BulletSpawner : MonoBehaviour
         //target = FindObjectOfType<EnemyMove>().transform;
         obstacle.carving = true;
         //originalYRotation = transform.eulerAngles.y;
+        turretState = TurretState.Installation;
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -58,39 +63,14 @@ public class BulletSpawner : MonoBehaviour
         if (other.tag.Equals("Enemy"))
         {
             targetInRange = true;
-            if(targetTrans==null)
+            if (targetTrans == null)
             {
                 targetTrans = other.transform;
                 targetOn = true;
             }
         }
 
-    //    if (eneycontrol != null)
-    //    {
-    //        targetPosition = new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z);
-    //        transform.LookAt(targetPosition);
-    //        timeAfterSpawn += Time.deltaTime;
-    //        if (timeAfterSpawn >= spawnRate)
-    //        {
-    //            Vector3 bulletSpawnPosition = transform.position + transform.forward * bulletHeight;
-    //            timeAfterSpawn = 0;
-    //            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPosition, transform.rotation);
-    //            bullet.transform.LookAt(targetPosition);
-    //            isShooting = true;
-    //            spawnRate = spawnRateMin;
-    //            shootSound.Play();
 
-            //        }
-
-
-
-            //        isPlayerIn = true;
-            //    }
-            //    else
-            //    {
-            //        isPlayerIn = false;
-            //    }
-            //    }
 
     }
 
@@ -109,7 +89,7 @@ public class BulletSpawner : MonoBehaviour
             targetOn = false;
             targetTrans = null;
         }
-        if(other.tag.Equals("Enemy"))
+        if (other.tag.Equals("Enemy"))
         {
             targetInRange = false;
             targetOn = false;
@@ -120,7 +100,7 @@ public class BulletSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isClick==false)
+        if (isClick == false)
         {
             shootingRange.SetActive(false);
         }
@@ -134,27 +114,29 @@ public class BulletSpawner : MonoBehaviour
 
         if (targetOn == true && targetTrans != null)
         {
-            if(IsTargetAlive(targetTrans)&&IsTargetInRange(targetTrans))
+            if (IsTargetAlive(targetTrans) && IsTargetInRange(targetTrans))
             {
 
-            targetPosition = new Vector3(targetTrans.transform.position.x, transform.position.y, targetTrans.transform.position.z);
-            transform.LookAt(targetPosition);
-            timeAfterSpawn += Time.deltaTime;
-            if (timeAfterSpawn >= spawnRate)
-            {
-                Vector3 bulletSpawnPosition = transform.position + transform.forward * bulletHeight;
-                timeAfterSpawn = 0;
+                targetPosition = new Vector3(targetTrans.transform.position.x, transform.position.y, targetTrans.transform.position.z);
+                transform.LookAt(targetPosition);
+                timeAfterSpawn += Time.deltaTime;
+                if (timeAfterSpawn >= spawnRate)
+                {
+                    Vector3 bulletSpawnPosition = transform.position + transform.forward * bulletHeight;
+
+
+                    timeAfterSpawn = 0;
                     Vector3 muzzleRotation = new Vector3(0f, 90f, 0f);
                     Quaternion mzlRotation = Quaternion.Euler(muzzleRotation);
-                GameObject muzzle = Instantiate(muzzleFire, bulletSpawnPosition, transform.rotation);
-                GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPosition, transform.rotation);
-                bullet.transform.LookAt(targetPosition);
-                isShooting = true;
-                spawnRate = spawnRateMin;
-                shootSound.Play();
-                Destroy(muzzle, 0.5f);
+                    GameObject muzzle = Instantiate(muzzleFire, bulletSpawnPosition, transform.rotation);
+                    GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPosition, transform.rotation);
+                    bullet.transform.LookAt(targetPosition);
+                    isShooting = true;
+                    spawnRate = spawnRateMin;
+                    shootSound.Play();
+                    Destroy(muzzle, 0.5f);
 
-            }
+                }
 
             }
             else
@@ -180,7 +162,7 @@ public class BulletSpawner : MonoBehaviour
     }
     private bool IsTargetAlive(Transform target_)
     {
-        if(target_.GetComponent<EnemyMove>().enemyHp==0)
+        if (target_.GetComponent<EnemyMove>().enemyHp == 0)
         {
             return false;
         }
@@ -188,12 +170,12 @@ public class BulletSpawner : MonoBehaviour
         {
             return true;
         }
-        
+
     }
 
     private bool IsTargetInRange(Transform target_)
     {
-        if(targetInRange==true)
+        if (targetInRange == true)
         {
             return true;
         }

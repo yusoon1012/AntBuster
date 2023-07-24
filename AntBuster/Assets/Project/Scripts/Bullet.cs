@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public float damage;
+    public int bulletType;
     public float speed = default;
     private Rigidbody rigid = default;
     EnemyMove enemyInfo;
@@ -19,9 +21,12 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag.Equals("Enemy"))
         {
-            
+            if(bulletType==1)
+            {
+                other.GetComponent<EnemyMove>().Slow();
+            }
             Destroy(gameObject);
-            other.GetComponent<EnemyMove>().Damaged(1);
+            other.GetComponent<EnemyMove>().Damaged(damage);
         }
     }
 

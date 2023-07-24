@@ -535,10 +535,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4045583493175550247}
   - component: {fileID: 4045583493123124525}
-  - component: {fileID: 4045583493123124526}
   - component: {fileID: 4045583493123123921}
   - component: {fileID: 4045583493123123920}
   - component: {fileID: 4045583493123124527}
+  - component: {fileID: 5679710693945290524}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -581,19 +581,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &4045583493123124526
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4045583493175852295}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!95 &4045583493123123921
 Animator:
   serializedVersion: 5
@@ -656,6 +643,20 @@ MonoBehaviour:
   goalObj: {fileID: 0}
   enemyHp: 0
   maxHp: 0
+--- !u!136 &5679710693945290524
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4045583493175852295}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.52, z: 0}
 --- !u!1 &4045583493175852297
 GameObject:
   m_ObjectHideFlags: 0
