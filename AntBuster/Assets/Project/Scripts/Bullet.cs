@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         rigid = GetComponent<Rigidbody>();
         rigid.velocity = transform.forward * speed;
         enemyInfo = GameObject.FindAnyObjectByType<EnemyMove>();
@@ -25,7 +26,11 @@ public class Bullet : MonoBehaviour
             {
                 other.GetComponent<EnemyMove>().Slow();
             }
+            if(bulletType!=2)
+            {
             Destroy(gameObject);
+
+            }
             other.GetComponent<EnemyMove>().Damaged(damage);
         }
     }

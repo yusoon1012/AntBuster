@@ -117,14 +117,15 @@ public class TurretPosition : MonoBehaviour, IPointerClickHandler, IDragHandler
             }
 
         }
-        Debug.LogFormat("state : {0}", state);
+        //Debug.LogFormat("state : {0}", state);
         if (state == turretState.upgrade)
         {
+            spawner.ChangeState();
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
 
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 if (Input.GetMouseButtonDown(0))
                 {
                     if (hit.transform == this.transform)

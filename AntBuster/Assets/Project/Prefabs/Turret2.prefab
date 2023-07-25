@@ -52,11 +52,9 @@ MonoBehaviour:
   shootingRange: {fileID: 4124696581383805571}
   muzzleFire: {fileID: 100008, guid: 7075bd5fe1480184695a32611c15da57, type: 3}
   bulletPrefab: {fileID: 3081804877139366655, guid: 48202f815b5954546ad164134baf502d, type: 3}
-  spawnRateMin: 0.5
-  spawnRateMax: 3
   turretAni: {fileID: 4124696580807182101}
   isFirstSet: 0
-  type: 0
+  type: 1
   spawnRate: 1
   bulletHeight: 1
   turretState: 0

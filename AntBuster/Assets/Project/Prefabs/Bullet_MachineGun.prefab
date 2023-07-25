@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3247107823090400276}
   - component: {fileID: 3247107823090400277}
   - component: {fileID: 3247107823090400278}
+  - component: {fileID: 7748997980174123211}
   m_Layer: 0
   m_Name: Bullet_MachineGun
   m_TagString: Untagged
@@ -46,7 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09e0c3776108254e848004ff2138ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  damage: 0.5
+  bulletType: 0
+  speed: 30
 --- !u!54 &3247107823090400278
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63,6 +66,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!136 &7748997980174123211
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247107823090400279}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3247107822123013609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77,6 +94,18 @@ PrefabInstance:
     - target: {fileID: 4000014018216288, guid: 424570faa59c41248b97fd39edf5d414, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000014018216288, guid: 424570faa59c41248b97fd39edf5d414, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000014018216288, guid: 424570faa59c41248b97fd39edf5d414, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000014018216288, guid: 424570faa59c41248b97fd39edf5d414, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4000014018216288, guid: 424570faa59c41248b97fd39edf5d414, type: 3}
       propertyPath: m_LocalPosition.x

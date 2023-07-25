@@ -1,4 +1,4 @@
-using Palmmedia.ReportGenerator.Core.CodeAnalysis;
+//using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.TextCore.Text;
@@ -22,7 +22,7 @@ public class EnemyMove : MonoBehaviour
     private float speed;
     private int randomDest;
     private float slowTimer=0f;
-    private float slowRate = 1.0f;
+    private float slowRate = 3.0f;
     private bool isPizzaOn = false;
     EnemySpawner spawner;
     Transform enemyTrans;
@@ -66,6 +66,11 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.isGameOver==true)
+        {
+            return;
+            
+        }
         hpBar.value = enemyHp/maxHp;
         if (isPizzaPos == false && randomDest == 1&&isRightTop==false)
         {
@@ -117,8 +122,8 @@ public class EnemyMove : MonoBehaviour
                 spawner.DeleteCount(1);
                 antLevel.AddExp(1);
             }
-
-
+            manager.AddScore(50);
+            manager.AddGold(20);
 
             Destroy(gameObject);
         }
@@ -131,7 +136,7 @@ public class EnemyMove : MonoBehaviour
             }
             else
             {
-            speed = 3f;
+            speed = 2f;
             agent.speed = speed;
 
             }

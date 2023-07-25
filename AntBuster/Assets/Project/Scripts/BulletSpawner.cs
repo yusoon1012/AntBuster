@@ -51,7 +51,15 @@ public class BulletSpawner : MonoBehaviour
         //target = FindObjectOfType<EnemyMove>().transform;
         obstacle.carving = true;
         //originalYRotation = transform.eulerAngles.y;
-        turretState = TurretState.Installation;
+        if (type == 0)
+        {
+
+            turretState = TurretState.Installation;
+        }
+        else
+        {
+            turretState = TurretState.Upgrade;
+        }
 
     }
 
@@ -67,6 +75,7 @@ public class BulletSpawner : MonoBehaviour
                 targetTrans = other.transform;
                 targetOn = true;
             }
+       
         }
 
 
@@ -75,6 +84,7 @@ public class BulletSpawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+       
         if (other.CompareTag("Enemy") && targetOn == false)
         {
             targetOn = true;
@@ -99,6 +109,15 @@ public class BulletSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if(turretState==TurretState.Installation)
+        {
+            return;
+        }
+        if (GameManager.isGameOver==true)
+        {
+            return;
+        }
         if (isClick == false)
         {
             shootingRange.SetActive(false);
@@ -109,10 +128,14 @@ public class BulletSpawner : MonoBehaviour
         }
         isShooting = false;
 
-        turretAni.SetBool("Shoot", isShooting);
+        //turretAni.SetBool("Shoot", isShooting);
 
         if (targetOn == true && targetTrans != null)
         {
+            if(turretState==TurretState.Installation)
+            {
+                return;
+            }
             if (IsTargetAlive(targetTrans) && IsTargetInRange(targetTrans))
             {
 
@@ -182,6 +205,11 @@ public class BulletSpawner : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void ChangeState()
+    {
+        turretState = TurretState.Upgrade;
     }
 }
 

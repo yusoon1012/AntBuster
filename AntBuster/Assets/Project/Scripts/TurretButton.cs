@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TurretButton : MonoBehaviour
 {
     public GameObject turretPrefab;
-   
+
     Ray ray;
     RaycastHit hit;
     Camera cam;
@@ -23,19 +23,28 @@ public class TurretButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Clicked()
     {
-        ray= Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit))
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (GameManager.currentGold >= GameManager.turretPrice)
         {
-            Vector3 newPosition = hit.point;
-            newPosition.y = turretPrefab.transform.position.y;
-            spawnObj = Instantiate(turretPrefab, newPosition, turretPrefab.transform.rotation);
+            GameManager.currentGold -= GameManager.turretPrice;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector3 newPosition = hit.point;
+                newPosition.y = turretPrefab.transform.position.y;
+                spawnObj = Instantiate(turretPrefab, newPosition, turretPrefab.transform.rotation);
+            }
+            if (GameManager.turretPrice >= 200)
+            {
+                GameManager.turretPrice += GameManager.turretPrice;
+            }
+            GameManager.turretPrice += 50;
         }
     }
 
-    
+
 }
