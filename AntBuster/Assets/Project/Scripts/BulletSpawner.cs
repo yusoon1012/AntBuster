@@ -16,17 +16,16 @@ public class BulletSpawner : MonoBehaviour
     public GameObject shootingRange;
     public GameObject muzzleFire = default;
     public GameObject bulletPrefab = default;
-    public float spawnRateMin = 0.5f;
-    public float spawnRateMax = 3f;
+   
     public Animator turretAni;
     public bool isFirstSet;
     public int type;
 
     private Transform target = default;
-    private float spawnRate = default;
+    public float spawnRate = default;
     private float timeAfterSpawn = default;
-    private float rotationSpeed = 250f;
-    private bool isPlayerIn = default;
+    
+    
     NavMeshObstacle obstacle;
     private bool isShooting = default;
     public float bulletHeight;
@@ -48,7 +47,7 @@ public class BulletSpawner : MonoBehaviour
         shootSound = GetComponent<AudioSource>();
         obstacle = GetComponent<NavMeshObstacle>();
         timeAfterSpawn = 0f;
-        spawnRate = Random.Range(spawnRateMin, spawnRateMax);
+        //spawnRate = Random.Range(spawnRateMin, spawnRateMax);
         //target = FindObjectOfType<EnemyMove>().transform;
         obstacle.carving = true;
         //originalYRotation = transform.eulerAngles.y;
@@ -132,7 +131,7 @@ public class BulletSpawner : MonoBehaviour
                     GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPosition, transform.rotation);
                     bullet.transform.LookAt(targetPosition);
                     isShooting = true;
-                    spawnRate = spawnRateMin;
+                    
                     shootSound.Play();
                     Destroy(muzzle, 0.5f);
 

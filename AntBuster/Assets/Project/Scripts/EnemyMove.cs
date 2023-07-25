@@ -1,3 +1,4 @@
+using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.TextCore.Text;
@@ -8,25 +9,31 @@ public class EnemyMove : MonoBehaviour
     public int enemyLevel = 1;
     public Slider hpBar;
     public GameObject pickPizza;
-    public GameObject pizzaObj;
-    public GameObject goalObj;
+    private GameObject pizzaObj;
+    private GameObject goalObj;
+   
     private NavMeshAgent agent;
     private Vector3 destination;
-    private bool isMove;
+   
     private bool isPizzaPos = false;
     private bool isSlow;
+    private bool isRightTop = false;
+    private bool isLeftBottom = false;
     private float speed;
-    
+    private int randomDest;
     private float slowTimer=0f;
     private float slowRate = 1.0f;
+    private bool isPizzaOn = false;
     EnemySpawner spawner;
     Transform enemyTrans;
     public float enemyHp;
     public float maxHp;
     Pizza pizzaClass;
     Goal goalClass;
+    RightTop rightTop;
+    LeftBottom leftBottom;
     AntLevelManager antLevel;
-
+    GameManager manager;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,43 +43,17 @@ public class EnemyMove : MonoBehaviour
         goalClass = GameObject.FindAnyObjectByType<Goal>();
         spawner = GameObject.FindAnyObjectByType<EnemySpawner>();
         antLevel = GameObject.FindAnyObjectByType<AntLevelManager>();
+        rightTop = GameObject.FindAnyObjectByType<RightTop>();
+        leftBottom = GameObject.FindAnyObjectByType<LeftBottom>();
+        manager = GameObject.FindAnyObjectByType<GameManager>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
-        switch(antLevel.antLevel)
-        {
-            case 1:
-                maxHp = 4;
-                break;
-            case 2:
-                maxHp = 5;
-                break;
-            case 3:
-                maxHp = 6;
-                break;
-            case 4:
-                maxHp = 7;
-                break;
-            case 5:
-                maxHp = 8;
-                break;
-            case 6:
-                maxHp = 9;
-                break;
-            case 7:
-                maxHp = 10;
-                break;
-            case 8:
-                maxHp = 11;
-                break;
-            case 9:
-                maxHp = 12;
-                break;
-            case 10:
-                maxHp = 15;
-                break;
-            default:
-                break;
-        }
+
+
+        randomDest = Random.Range(0, 3);
+
+            maxHp += 4+(AntLevelManager.antLevel/3);
+        
                 enemyHp = maxHp;
 
     }
@@ -80,18 +61,40 @@ public class EnemyMove : MonoBehaviour
     {
         agent.SetDestination(dest);  //추가
         destination = dest;
-        isMove = true;
+        
     }
     // Update is called once per frame
     void Update()
     {
         hpBar.value = enemyHp/maxHp;
-        if(isPizzaPos == false)
+        if (isPizzaPos == false && randomDest == 1&&isRightTop==false)
+        {
+            SetDestination(rightTop.transform.position);
+        }
+        else if(isPizzaPos==false&&randomDest==2&&isLeftBottom==false)
+        {
+            SetDestination(leftBottom.transform.position);
+        }
+        else
         {
             SetDestination(pizzaClass.transform.position);
 
         }
-        else
+        //if (isPizzaPos==false&&transform.position==rightTop.transform.position)
+        //{
+
+        //    SetDestination(pizzaClass.transform.position);
+        //}
+        if(isPizzaPos==true&&randomDest==1&&isRightTop==false)
+        {
+            SetDestination(rightTop.transform.position);
+        }
+        else if (isPizzaPos == true && randomDest == 2 && isLeftBottom == false)
+        {
+            SetDestination(leftBottom.transform.position);
+
+        }
+        else if (isPizzaPos==true)
         {
             SetDestination(goalClass.transform.position);
         }
@@ -105,7 +108,7 @@ public class EnemyMove : MonoBehaviour
         }
         if(enemyHp<=0)
         {
-            if(isPizzaPos==true)
+            if(isPizzaOn == true)
             {
                 pizzaClass.AddPizza();
             }
@@ -136,6 +139,8 @@ public class EnemyMove : MonoBehaviour
         else
         {
             speed = 5f;
+            agent.speed = speed;
+
         }
     }
 
@@ -144,17 +149,35 @@ public class EnemyMove : MonoBehaviour
         if(other.tag.Equals("Pizza"))
         {
             isPizzaPos = true;
-            pizzaClass.RemovePizza();
-            if(pizzaClass.pizzaHp>=0)
+            if(pizzaClass.pizzaHp>0)
             {
+                isPizzaOn = true;
                 pickPizza.SetActive(true);
+                pizzaClass.RemovePizza();
             }
-            
-            Debug.Log("피자");
+            isLeftBottom = false;
+            isRightTop = false;
+            //Debug.Log("피자");
         }
-        if(isPizzaPos==true&&other.tag.Equals("Goal"))
+        if(isPizzaOn == true&&other.tag.Equals("Goal"))
         {
+            spawner.DeleteCount(1);
+            GameManager.pizzahp -= 1;
             Destroy(gameObject);
+            if(GameManager.pizzahp==0)
+            {
+                manager.GameOver();
+            }
+
+
+        }
+        if(other.tag.Equals("RightTop"))
+        {
+            isRightTop = true;
+        }
+        if (other.tag.Equals("LeftBottom"))
+        {
+            isLeftBottom = true;
         }
     }
 

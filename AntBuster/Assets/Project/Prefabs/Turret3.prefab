@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 53999427348036839}
   - component: {fileID: 53999427348036838}
   - component: {fileID: 53999427348036834}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Turret3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,6 +57,7 @@ MonoBehaviour:
   turretAni: {fileID: 139147814734792602}
   isFirstSet: 0
   type: 0
+  spawnRate: 0.5
   bulletHeight: 0
   turretState: 0
 --- !u!135 &53999427348036839
@@ -195,7 +196,7 @@ GameObject:
   - component: {fileID: 53999427362584948}
   - component: {fileID: 53999427362584946}
   - component: {fileID: 53999427362584949}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,6 +280,10 @@ PrefabInstance:
       value: Canon_lvl_3
       objectReference: {fileID: 0}
     - target: {fileID: 1000012105359850, guid: 16e71322676cb6840a252ad4f7fc2d26, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012105359850, guid: 16e71322676cb6840a252ad4f7fc2d26, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
@@ -287,6 +292,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1000012389614952, guid: 16e71322676cb6840a252ad4f7fc2d26, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012389614952, guid: 16e71322676cb6840a252ad4f7fc2d26, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
@@ -295,12 +304,20 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1000013796546054, guid: 16e71322676cb6840a252ad4f7fc2d26, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013796546054, guid: 16e71322676cb6840a252ad4f7fc2d26, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1000013796546054, guid: 16e71322676cb6840a252ad4f7fc2d26, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013936608536, guid: 16e71322676cb6840a252ad4f7fc2d26, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1000013936608536, guid: 16e71322676cb6840a252ad4f7fc2d26, type: 3}
       propertyPath: m_NavMeshLayer

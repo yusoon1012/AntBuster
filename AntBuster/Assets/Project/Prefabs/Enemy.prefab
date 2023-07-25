@@ -128,7 +128,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4449974536945855590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,8 +639,6 @@ MonoBehaviour:
   enemyLevel: 1
   hpBar: {fileID: 752825525201274006}
   pickPizza: {fileID: 3449595292754489510}
-  pizzaObj: {fileID: 0}
-  goalObj: {fileID: 0}
   enemyHp: 0
   maxHp: 0
 --- !u!136 &5679710693945290524

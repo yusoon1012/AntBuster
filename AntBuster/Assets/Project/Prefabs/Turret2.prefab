@@ -57,6 +57,7 @@ MonoBehaviour:
   turretAni: {fileID: 4124696580807182101}
   isFirstSet: 0
   type: 0
+  spawnRate: 1
   bulletHeight: 1
   turretState: 0
 --- !u!135 &4124696579586469567

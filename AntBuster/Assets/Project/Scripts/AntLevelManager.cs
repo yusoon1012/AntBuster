@@ -5,7 +5,11 @@ using UnityEngine;
 public class AntLevelManager : MonoBehaviour
 {
     public float antExp=0;
-    public int antLevel=1;
+    public static int antLevel;
+    public void Start()
+    {
+        antLevel = 1;
+    }
     // Start is called before the first frame update
     public void AddExp(float exp_)
     {

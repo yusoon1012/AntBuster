@@ -42,6 +42,7 @@ public class TurretPosition : MonoBehaviour, IPointerClickHandler, IDragHandler
             objectHitPosition.transform.position = hit.point;
             this.transform.SetParent(objectHitPosition.transform);
             isClicked = true;
+            
         }
 
         if (Input.GetMouseButtonDown(0) && state == turretState.installation)
@@ -72,6 +73,7 @@ public class TurretPosition : MonoBehaviour, IPointerClickHandler, IDragHandler
         }
         if (state == turretState.installation)
         {
+            upgradeUi.SetActive(false);
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit))
@@ -79,11 +81,11 @@ public class TurretPosition : MonoBehaviour, IPointerClickHandler, IDragHandler
 
                 if (isClicked == true)
                 {
+                    if (hit.transform == this.transform)
+                    {
 
                     //if (hit.transform.name == "Turret1_Move" || hit.transform.name == "Turret1_Move(Clone)")
                     //{
-                    if (hit.transform == this.transform)
-                    {
 
                         spawner.IsClicked(true);
 
@@ -141,20 +143,12 @@ public class TurretPosition : MonoBehaviour, IPointerClickHandler, IDragHandler
 
 
                         // }
-                        spawner.IsClicked(true);
+                        spawner.IsClicked(isClicked);
                         upgradeUi.SetActive(isClicked);
 
 
                     }
-                    else
-                    {
-                        spawner.IsClicked(false);
-
-                        
-
-
-
-                    }
+                    
                 }
             }
         }

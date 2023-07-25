@@ -10,6 +10,8 @@ TagManager:
   - Goal
   - TurretButton
   - Turret
+  - LeftBottom
+  - RightTop
   layers:
   - Default
   - TransparentFX
