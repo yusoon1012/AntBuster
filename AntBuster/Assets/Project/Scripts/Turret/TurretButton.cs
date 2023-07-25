@@ -28,6 +28,7 @@ public class TurretButton : MonoBehaviour
 
     public void Clicked()
     {
+        Debug.Log("turretButton Clicked");
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (GameManager.currentGold >= GameManager.turretPrice)
         {

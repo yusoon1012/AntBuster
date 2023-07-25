@@ -109,6 +109,7 @@ public class BulletSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Debug.LogFormat("turret isclick {0}", isClick);
         if(turretState==TurretState.Installation)
         {
