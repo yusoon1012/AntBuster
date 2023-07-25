@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static int score;
     public static bool isGameOver;
     public GameObject gameOverUi;
+    public GameObject pauseUi;
     public TMP_Text level;
     public TMP_Text gold;
     public TMP_Text turretGold;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     public int icePrice;
     public int heavyPrice;
     public int machineGunPrice;
+    private bool isPause;
     private AudioSource mouseSound;
 
     
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isPause = false;
         score = 0;
         turretPrice = 100;
         currentGold = 100;
@@ -42,7 +45,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (isGameOver == true)
+        {
+            Time.timeScale = 0;
+        }
+        if (Input.GetMouseButtonDown(0))
         {
             if(mouseSound.isPlaying==true)
             {
@@ -56,12 +63,34 @@ public class GameManager : MonoBehaviour
 
             }
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(isPause == false)
+            {
+            isPause=true;
+            }
+            else
+            {
+                isPause = false;
+            }
+        }
+        if(isPause==true)
+        {
+            pauseUi.SetActive(true);
+            Time.timeScale = 0;
+        }
+        if (isPause==false)
+        {
+            pauseUi.SetActive(false);
+            Time.timeScale=1;
+        }
+
         level.text = string.Format("LV.{0}", AntLevelManager.antLevel);
         gold.text = string.Format("{0}", currentGold);
         scoreText.text = string.Format("SCORE {0}", score);
         turretGold.text = string.Format("{0}", turretPrice);
         float highScore = PlayerPrefs.GetFloat("HighScore");
-
+       
         if (score > highScore)
         {
             highScore = score;
@@ -93,5 +122,9 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene("PlayScene");
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4124696579586469567}
   - component: {fileID: 4124696579586469566}
   - component: {fileID: 4124696579586469565}
+  - component: {fileID: 230066126898884570}
   m_Layer: 2
   m_Name: Turret2
   m_TagString: Turret
@@ -183,6 +184,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &230066126898884570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124696579586469564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e87d43c56f1b046942f5b4de061d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 4124696579586469560}
 --- !u!1 &4124696580807182100
 GameObject:
   m_ObjectHideFlags: 0

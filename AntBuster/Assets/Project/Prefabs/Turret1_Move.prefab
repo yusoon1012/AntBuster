@@ -211,10 +211,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPosition: {fileID: 1500672984991693220}
   originTurret: {fileID: 1500672986041893317}
-  heavyTurret: {fileID: 4124696579586469564, guid: 093f4243378496043847579e660bce65, type: 3}
-  iceTurret: {fileID: 53999427348036842, guid: 37a45893264456947b6da36683bccf45, type: 3}
-  machineGunTurret: {fileID: 4683974049277954733, guid: 0fd22769a332c384d892e44dfcc8145c, type: 3}
-  dinide: {fileID: 0}
+  heavyTurret: {fileID: 8353988924048985083, guid: 1d5e96d89cb17d84b82124884a6c0d80, type: 3}
+  iceTurret: {fileID: 4725700495375013034, guid: 8a9aacd2a5fc325409e512dfbe1cb2fc, type: 3}
+  machineGunTurret: {fileID: 2754923336687202985, guid: 096d1e7aa29be0444a618f0110226d7a, type: 3}
   icePrice: 300
   heavyPrice: 500
   machineGunPrice: 800
@@ -400,7 +399,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.499
   m_Pitch: 1
   Loop: 0
   Mute: 0
